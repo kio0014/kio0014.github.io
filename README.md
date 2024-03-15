@@ -1,1 +1,3 @@
-# kio0014.github.io
+this site is under construction ＼（〇_ｏ）／
+
+(>'-'<)
