@@ -37,7 +37,7 @@
   // Set the date we're counting down to
   var countDownDate = new Date();
   countDownDate.setHours(countDownDate.getHours() + 8);
-  countDownDate.setMinutes(countDownDate.getMinutes() + 57);
+  countDownDate.setMinutes(countDownDate.getMinutes() + 45);
   countDownDate.setSeconds(countDownDate.getSeconds() + 1);
   countDownDate.setMilliseconds(countDownDate.getMilliseconds() + 10);
 
@@ -55,6 +55,9 @@
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     var milliseconds = distance % 1000;
+
+    // Pad milliseconds with leading zeros if necessary
+    milliseconds = milliseconds.toString().padStart(3, '0');
       
     // Output the result in an element with id="demo"
     document.getElementById("demo").innerHTML = hours + "h "
