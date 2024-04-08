@@ -1,90 +1,33 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
-
-  p {
-    text-align: center;
-    font-size: 60px;
-    margin-top: 0px;
-  }
-
-  #title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-
-  #footer {
-    text-align: center;
-    font-size: 14px;
-    margin-top: 20px;
-  }
-</style>
-<title>Solar Eclipse Countdown for Texas</title>
-</head>
-<body>
-
-<div id="title">Solar Eclipse Countdown for Texas</div>
-
+<!-- Display the countdown timer in an element -->
 <p id="demo"></p>
 
 <script>
-// Function to get the countdown date from local storage
-function getCountdownDate() {
-  var countdownDate = localStorage.getItem('countdownDate');
-  if (countdownDate) {
-    return new Date(parseInt(countdownDate));
-  } else {
-    // If countdown date is not found in local storage, set it to a default value
-    var defaultDate = new Date();
-    defaultDate.setHours(defaultDate.getHours() + 8);
-    defaultDate.setMinutes(defaultDate.getMinutes() + 45);
-    defaultDate.setSeconds(defaultDate.getSeconds() + 1);
-    defaultDate.setMilliseconds(defaultDate.getMilliseconds() + 10);
-    localStorage.setItem('countdownDate', defaultDate.getTime());
-    return defaultDate;
-  }
-}
-
 // Set the date we're counting down to
-var countDownDate = getCountdownDate();
+var countDownDate = new Date("Jan 5, 2030 15:37:25").getTime();
 
-// Update the count down every 1 millisecond
+// Update the count down every 1 second
 var x = setInterval(function() {
 
   // Get today's date and time
   var now = new Date().getTime();
-    
+
   // Find the distance between now and the count down date
   var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes, seconds, and milliseconds
-  var hours = Math.floor(distance / (1000 * 60 * 60));
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  var milliseconds = distance % 1000;
 
-  // Pad milliseconds with leading zeros if necessary
-  milliseconds = milliseconds.toString().padStart(3, '0');
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("demo").innerHTML = hours + "h "
-  + minutes + "m " + seconds + "s " + milliseconds + "ms";
-    
-  // If the count down is over, display "EXPIRED" and clear the interval
-  if (distance <= 0) {
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
     clearInterval(x);
     document.getElementById("demo").innerHTML = "EXPIRED";
   }
-}, 1); // Updating every 1 millisecond for precision
+}, 1000);
 </script>
-
-<div id="footer">TVEgesd Don't forget to record the Solar Eclipse!</div>
-
-</body>
-</html>
