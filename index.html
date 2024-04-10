@@ -48,10 +48,35 @@ getCountdownDate().then(countDownDate => {
 
     // Get today's date and time
     var now = new Date().getTime();
-      
+
     // Find the distance between now and the count down date
     var distance = countDownDate - now;
-      
+
     // Time calculations for days, hours, minutes, seconds, and milliseconds
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    var milliseconds = distance % 1000;
+
+    // Pad milliseconds with leading zeros if necessary
+    milliseconds = milliseconds.toString().padStart(3, '0');
+
+    // Output the result in an element with id="demo"
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s " + milliseconds + "ms";
+
+    // If the count down is over, display "EXPIRED" and clear the interval
+    if (distance <= 0) {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "EXPIRED";
+    }
+  }, 1); // Updating every 1 millisecond for precision
+});
+
+</script>
+
+<div id="footer">TVEgesd Don't forget to record the Solar Eclipse!!</div>
+
+</body>
+</html>
